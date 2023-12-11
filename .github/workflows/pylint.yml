@@ -37,10 +37,10 @@ jobs:
         echo -e "Date\tTime\tPush Name\tBranch" > reports/ResultLint.xlsx
         echo -e "$date\t$time\t$GITHUB_ACTOR\t$branch" >> reports/ResultLint.xlsx
 
-        - name: Debugging
-          run: |
-            ls -l  # Affiche le contenu du répertoire de travail
-            ls -l reports  # Affiche le contenu du dossier reports
-            cat reports/pylint_result.txt  # Affiche le contenu de pylint_result.txt
-            cat reports/ResultLint.xlsx  # Affiche le contenu de ResultLint.xlsx
+    - name: Debugging
+      run: |
+        ls -l  # Affiche le contenu du répertoire de travail
+        ls -l reports  # Affiche le contenu du dossier reports
+        cat reports/pylint_result.txt  # Affiche le contenu de pylint_result.txt
+        cat reports/ResultLint.xlsx  # Affiche le contenu de ResultLint.xlsx
 
