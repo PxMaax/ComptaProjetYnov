@@ -44,8 +44,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Generate Test Report
-      run: python generate_report.py
+    - name: Run Tests with HTML Report
+      run: |
+        mkdir -p reports
+        pytest --html=reports/test_report.html
 
   release:
     needs: generate-report
