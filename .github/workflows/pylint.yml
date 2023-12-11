@@ -32,7 +32,7 @@ jobs:
 
         pylint_result=$(pylint $(git ls-files '*.py'))
 
-        echo "$pylint_result" > pylint_result.txt
+        echo "$pylint_result" > reports/pylint_result.txt
 
-        echo -e "Date\tTime\tPush Name\tBranch" > ResultLint.xlsx
-        echo -e "$date\t$time\t$GITHUB_ACTOR\t$branch" >> ResultLint.xlsx
+        echo -e "Date\tTime\tPush Name\tBranch" > reports/ResultLint.xlsx
+        echo -e "$date\t$time\t$GITHUB_ACTOR\t$branch" >> reports/ResultLint.xlsx
