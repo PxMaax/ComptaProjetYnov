@@ -1,6 +1,9 @@
 name: Pylint
 
-on: [push]
+on:
+  push:
+    branches:
+      - main  # Ajoutez d'autres branches si nécessaire
 
 jobs:
   build:
@@ -10,14 +13,26 @@ jobs:
         python-version: ["3.8", "3.9", "3.10"]
     steps:
     - uses: actions/checkout@v3
+
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install pylint
+
     - name: Analysing the code with pylint
       run: |
-        pylint $(git ls-files '*.py')
+        date=$(date +"%Y-%m-%d")
+        time=$(date +"%H-%M-%S")
+        branch=$(echo $GITHUB_REF | awk -F/ '{print $3}')
+
+        pylint_result=$(pylint $(git ls-files '*.py'))
+
+        echo "$pylint_result" > pylint_result.txt
+
+        echo -e "Date\tTime\tPush Name\tBranch" > ResultLint.xlsx
+        echo -e "$date\t$time\t$GITHUB_ACTOR\t$branch" >> ResultLint.xlsx
