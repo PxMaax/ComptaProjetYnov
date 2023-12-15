@@ -37,8 +37,27 @@ jobs:
         path: '/home/runner/work/ComptaProjetYnov/ComptaProjetYnov/test-results.xml'             # Path to test results (inside artifact .zip)
         reporter: java-junit
         
-    - name: Lint with Ruff
+    - name: Install dependencies
       run: |
-        pip install ruff
-        ruff --output-format=github .
-        continue-on-error: true
+        python -m pip install --upgrade pip
+        pip install pylint
+    
+    - name: Analysing the code with pylint
+      run: |
+        date=$(date +"%Y-%m-%d")
+        time=$(date +"%H-%M-%S")
+        branch=$(echo $GITHUB_REF | awk -F/ '{print $3}')
+
+        pylint_result=$(pylint $(git ls-files '*.py'))
+
+        echo "$pylint_result" > reports/pylint_result.txt
+
+        echo -e "Date\tTime\tPush Name\tBranch" > reports/ResultLint.xlsx
+        echo -e "$date\t$time\t$GITHUB_ACTOR\t$branch" >> reports/ResultLint.xlsx
+
+    - name: Debugging
+      run: |
+        ls -l  # Affiche le contenu du répertoire de travail
+        ls -l reports  # Affiche le contenu du dossier reports
+        cat reports/pylint_result.txt  # Affiche le contenu de pylint_result.txt
+        cat reports/ResultLint.xlsx  # Affiche le contenu de ResultLint.xlsx
