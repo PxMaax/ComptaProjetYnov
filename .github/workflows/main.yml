@@ -34,7 +34,7 @@ jobs:
       uses: dorny/test-reporter@v1
       with:
         name: Python test                  # Name of the check run which will be created
-        path: ./reports/test-results.xml                  # Path to test results (inside artifact .zip)
+        path: test-results.xml                  # Path to test results (inside artifact .zip)
         reporter: java-junit
        
     - name: Lint with Ruff
