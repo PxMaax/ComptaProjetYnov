@@ -1,7 +1,7 @@
 [run]
 # Indiquez quels modules doivent être mesurés par coverage
 source =
-    Code/Tests
+    Code
 
 [report]
 # Seuil de couverture pour chaque fichier (en pourcentage)
