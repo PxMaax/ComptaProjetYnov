@@ -29,8 +29,8 @@ jobs:
     - name: Test with pytest
       run: |
         pip install pytest pytest-cov
-        pytest --cov sample $(find . -name '*test.py')
-        
+        pytest /Code --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
+            
     - name: Lint with Ruff
       run: |
         pip install ruff
