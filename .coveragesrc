@@ -1,0 +1,19 @@
+[run]
+# Indiquez quels modules doivent être mesurés par coverage
+source =
+    Code/Tests
+
+[report]
+# Seuil de couverture pour chaque fichier (en pourcentage)
+fail_under = 80
+
+# Exclure certaines lignes de la mesure de couverture
+exclude_lines =
+    # Ignorez les lignes de code spécifiques, par exemple :
+    if self.debug:
+    raise AssertionError
+    raise NotImplementedError
+
+[html]
+# Configuration pour les rapports HTML
+directory = coverage_html_report
