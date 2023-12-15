@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+    <testsuite name="pytest" errors="0" failures="0" skipped="0" tests="3" time="0.045" timestamp="2023-12-15T15:28:50.840515" hostname="LAPTOP-ENU10BV8">
+        <testcase classname="Code.mymodule_test" name="test_add_one_positive" time="0.001" />
+        <testcase classname="Code.mymodule_test" name="test_add_one_negative" time="0.001" />
+        <testcase classname="Code.mymodule_test" name="test_add_one_zero" time="0.001" />
+    </testsuite>
+</testsuites>
