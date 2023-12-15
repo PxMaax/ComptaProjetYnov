@@ -39,7 +39,7 @@ jobs:
         
     - name: Install dependencies
       run: |
-        pip install pylint
+       python -m pip install pylint
 
     - name: Run Pylint and Save Results
       run: |
