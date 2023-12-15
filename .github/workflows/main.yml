@@ -36,7 +36,7 @@ jobs:
         name: Python test                  # Name of the check run which will be created
         path: '/home/runner/work/ComptaProjetYnov/ComptaProjetYnov/test-results.xml'             # Path to test results (inside artifact .zip)
         reporter: java-junit
-       
+        
     - name: Lint with Ruff
       run: |
         pip install ruff
