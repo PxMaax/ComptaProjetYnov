@@ -8,43 +8,46 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11"]
 
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
-        python-version: 3.10.10
+          python-version: ${{ matrix.python-version }}
 
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Run Tests
-      run: pytest
+    - name: Run tests
+      run: pytest --junit-xml=test-results.xml
 
-  generate-report:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-
-    - name: Set up Python
-      uses: actions/setup-python@v2
+    - name: Surface failing tests
+      if: always()
+      uses: pmeier/pytest-results-action@main
       with:
-        python-version: 3.10.10
-
-    - name: Install Dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-
-    - name: Run Tests with HTML Report
-      run: |
-        mkdir -p reports
-        pytest --html=reports/test_report.html
+        # A list of JUnit XML files, directories containing the former, and wildcard
+        # patterns to process.
+        # See @actions/glob for supported patterns.
+        path: test-results.xml
+    
+        # Add a summary of the results at the top of the report
+        # Default: true
+        summary: true
+    
+        # Select which results should be included in the report.
+        # Follows the same syntax as
+        # `pytest -r`
+        # Default: fEX
+        display-options: fEX
+    
+        # Fail the workflow if no JUnit XML was found.
+        # Default: true
+        fail-on-empty: true
