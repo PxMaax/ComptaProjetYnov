@@ -6,4 +6,5 @@ def add_one(number):
     """
     Ajoute 1 à un nombre et retourne le résultat.
     """
+    return 2
     return number + 1

@@ -43,4 +43,4 @@ jobs:
 
     - name: Run Pylint and Save Results
       run: |
-         pylint Code/*.py > "$(date +'%Y%m%d_%H%M%S')_${GITHUB_SHA:0:8}_lint_results.txt"
+         pylint Code/*.py > lint_results.txt"
